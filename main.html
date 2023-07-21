@@ -35,29 +35,29 @@
   </div>
 
  <script>
-    const container = document.getElementById('container');
+    const items = document.getElementById('items');
     let isDragging = false;
     let startX;
     let scrollLeft;
 
-    container.addEventListener('mousedown', (e) => {
+    items.addEventListener('mousedown', (e) => {
       isDragging = true;
-      startX = e.pageX - container.offsetLeft;
-      scrollLeft = container.scrollLeft;
-      container.style.cursor = 'grabbing';
+      startX = e.pageX - items.offsetLeft;
+      scrollLeft = items.scrollLeft;
+      items.style.cursor = 'grabbing';
     });
 
-    container.addEventListener('mouseup', () => {
+    items.addEventListener('mouseup', () => {
       isDragging = false;
-      container.style.cursor = 'grab';
+      items.style.cursor = 'grab';
     });
 
-    container.addEventListener('mousemove', (e) => {
+    items.addEventListener('mousemove', (e) => {
       if (!isDragging) return;
       e.preventDefault();
-      const x = e.pageX - container.offsetLeft;
+      const x = e.pageX - items.offsetLeft;
       const walk = (x - startX) * 2; // Adjust scroll speed as needed
-      container.scrollLeft = scrollLeft - walk;
+      items.scrollLeft = scrollLeft - walk;
     });
   </script>
 
