@@ -35,30 +35,15 @@
   </div>
 
  <script>
-    const items = document.getElementById('items');
-    let isDragging = false;
-    let startX;
-    let scrollLeft;
+    () => {
+  cy.get('.items').should('exist').trigger('mousedown', { which: 1, pageX: 493, pageY: 391 })
+    .trigger('mousemove', { which: 1, pageX: 271, pageY: 391 })
+    .trigger('mouseup');
 
-    items.addEventListener('mousedown', (e) => {
-      isDragging = true;
-      startX = e.pageX - items.offsetLeft;
-      scrollLeft = items.scrollLeft;
-      items.style.cursor = 'grabbing';
-    });
-
-    items.addEventListener('mouseup', () => {
-      isDragging = false;
-      items.style.cursor = 'grab';
-    });
-
-    items.addEventListener('mousemove', (e) => {
-      if (!isDragging) return;
-      e.preventDefault();
-      const x = e.pageX - items.offsetLeft;
-      const walk = (x - startX) * 2; // Adjust scroll speed as needed
-      items.scrollLeft = scrollLeft - walk;
-    });
+  cy.get('.items').should($items => {
+    expect($items[0].scrollLeft).to.greaterThan(0);
+  });
+}
   </script>
 
   </body>
